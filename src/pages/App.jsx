@@ -4,31 +4,39 @@ import viteLogo from '/vite.svg'
 import '../App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [numberOne, setNumberOne] = useState(0)
+  const [numberTwo, setNumberTwo] = useState(0)
+  const [result, setResult] = useState(0)
+
+  function calc() {
+    if (isNaN(Number(numberOne)) || isNaN(Number(numberTwo))){
+      alert("Digite um numero")
+      return
+    }
+   setResult(Number(numberOne) + Number(numberTwo))
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank" rel="noreferrer">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="container">
+      <div className="calc">
+        <div className='main'>
+          <input type="text" placeholder='Type number' onChange={(event) => {
+            setNumberOne(event.currentTarget.value)
+            }}/>
+          <p className='plus'>+</p>
+          <input type="text"  placeholder='Type number' onChange={(event) => {
+            setNumberTwo(event.currentTarget.value)
+          }}/>
+        </div>
+        <button onClick={() => calc()}>Calcular</button>
+       </div>
+      <div className='result'>
+        <h1>O RESULTADO É</h1>
+          <span>
+            {result}
+          </span>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    </div>
   )
 }
 
